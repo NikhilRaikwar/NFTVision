@@ -35,30 +35,32 @@ export const getNFTMarketAnalytics = async (blockchain = "ethereum", timeRange =
   }
 }
 
-export const getTokenBalance = async (offset = 0, limit = 30) => {
+export const getTokenBalance = async (walletAddress: string, blockchain: string, offset = 0, limit = 30) => {
   try {
-    const response = await api.get(`/token/balance?offset=${offset}&limit=${limit}`)
-    return response.data
+    const response = await api.get(
+      `/token/balance?blockchain=${blockchain}&address=${walletAddress}&offset=${offset}&limit=${limit}`
+    );
+    return response.data;
   } catch (error) {
-    handleApiError(error as AxiosError)
+    handleApiError(error as AxiosError);
   }
 }
 
-export const getTokenMetrics = async (offset = 0, limit = 30) => {
+export const getTokenMetrics = async (blockchain: string, offset = 0, limit = 30) => {
   try {
-    const response = await api.get(`/token/metrics?offset=${offset}&limit=${limit}`)
-    return response.data
+    const response = await api.get(`/token/metrics?blockchain=${blockchain}&offset=${offset}&limit=${limit}`);
+    return response.data;
   } catch (error) {
-    handleApiError(error as AxiosError)
+    handleApiError(error as AxiosError);
   }
 }
 
 export const getSupportedBlockchains = async (offset = 0, limit = 30) => {
   try {
-    const response = await api.get(`/blockchains?offset=${offset}&limit=${limit}`)
-    return response.data
+    const response = await api.get(`/blockchains?offset=${offset}&limit=${limit}`);
+    return response.data;
   } catch (error) {
-    handleApiError(error as AxiosError)
+    handleApiError(error as AxiosError);
   }
 }
 
@@ -68,6 +70,26 @@ export const getDefiPortfolio = async (address: string, blockchain = "ethereum")
     return response.data
   } catch (error) {
     handleApiError(error as AxiosError)
+  }
+}
+
+export const getNFTPortfolio = async (wallet: string, blockchain: string, timeRange = "all", offset = 0, limit = 30) => {
+  try {
+    const response = await api.get(`/wallet/balance/nft?wallet=${wallet}&blockchain=${blockchain}&time_range=${timeRange}&offset=${offset}&limit=${limit}`);
+    return response.data;
+  } catch (error) {
+    handleApiError(error as AxiosError);
+  }
+}
+
+export const getWashTradeData = async (blockchain = "ethereum", timeRange = "24h", sortBy = "name", sortOrder = "desc", offset = 0, limit = 30) => {
+  try {
+    const response = await api.get(
+      `/nft/marketplace/washtrade?blockchain=${blockchain}&time_range=${timeRange}&sort_by=${sortBy}&sort_order=${sortOrder}&offset=${offset}&limit=${limit}`
+    );
+    return response.data;
+  } catch (error) {
+    handleApiError(error as AxiosError);
   }
 }
 
