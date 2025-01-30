@@ -1,5 +1,4 @@
 // landing.tsx
-
 "use client";
 
 import { usePrivy } from "@privy-io/react-auth";
@@ -17,7 +16,7 @@ import { cn } from "@/lib/utils";
 import { NeonGradientCard } from "@/components/neon-gradient-card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import Link from "next/link"; // Import Link
+import Link from "next/link";  // Import Link
 
 export default function Page() {
   const { authenticated } = usePrivy();
@@ -79,7 +78,16 @@ export default function Page() {
       gradientTo: "#fee140",
       link: "/nft-transactions"
     },
-    // Add NFT Wash Trade feature
+    // Add NFT Portfolio feature
+    {
+      title: "NFT Portfolio",
+      description: "View your NFT portfolio across different blockchains.",
+      icon: ShoppingBag,
+      gradientFrom: "#ff4e4e",
+      gradientTo: "#ff9d9d",
+      link: "/nft-portfolio"
+    },
+
     {
       title: "NFT Wash Trades",
       description: "View wash trade trends across different marketplaces.",

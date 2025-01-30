@@ -55,7 +55,13 @@ export default function DashboardPage() {
       description: "Explore the latest NFT transactions across blockchains.",
       link: "/nft-transactions",
     },
-    // Add NFT Wash Trade feature
+    // Add NFT Portfolio feature
+    {
+      title: "NFT Portfolio",
+      description: "View your NFT portfolio across different blockchains.",
+      link: "/nft-portfolio",
+    },
+
     {
       title: "NFT Wash Trades",
       description: "View wash trade trends across different marketplaces.",
