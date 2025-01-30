@@ -63,6 +63,13 @@ export default function Page() {
       gradientFrom: "#fa709a",
       gradientTo: "#fee140",
     },
+    {
+      title: "NFT Transactions",
+      description: "Track the latest NFT transactions in real-time.",
+      icon: ShoppingBag,
+      gradientFrom: "#fa709a",
+      gradientTo: "#fee140",
+    },
   ]
 
   return (
