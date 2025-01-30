@@ -49,6 +49,11 @@ export default function DashboardPage() {
       description: "Discover marketplace insights and analytics.",
       link: "/nft-marketplaces",
     },
+    {
+      title: "NFT Transactions",
+      description: "Explore the latest NFT transactions across blockchains.",
+      link: "/nft-transactions",
+    },
   ]
 
   return (

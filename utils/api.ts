@@ -80,3 +80,25 @@ export const getNFTMarketplaceMetadata = async () => {
   }
 }
 
+// api.ts - Add NFT Transactions API integration
+export const getNFTTransactions = async (blockchain = "ethereum", timeRange = "24h", offset = 0, limit = 30) => {
+  try {
+    const response = await api.get(
+      `/nft/transactions?blockchain=${blockchain}&time_range=${timeRange}&offset=${offset}&limit=${limit}`
+    );
+    return response.data;
+  } catch (error) {
+    handleApiError(error as AxiosError);
+  }
+};
+
+// Map blockchain names to their explorers
+export const blockchainExplorerLinks = {
+  ethereum: "https://etherscan.io/",
+  binance: "https://bscscan.com/",
+  bitcoin: "https://blockchain.info/",
+  polygon: "https://polygonscan.com/",
+  solana: "https://explorer.solana.com/",
+  avalanche: "https://snowtrace.io/",
+  linea: "https://explorer.linea.build/"
+};
