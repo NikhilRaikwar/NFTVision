@@ -1,12 +1,16 @@
-import { Layout } from "@/components/layout"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+"use client";
+
+import { Layout } from "@/components/layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 
 export default function PrivacyPolicyPage() {
   return (
-    <Layout>
+    <Layout showBackButton>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
-        <Card>
+        <Card className="max-w-4xl mx-auto shadow-lg rounded-xl">
           <CardHeader>
             <CardTitle>NFTVision Privacy Policy</CardTitle>
           </CardHeader>
@@ -60,6 +64,5 @@ export default function PrivacyPolicyPage() {
         </Card>
       </div>
     </Layout>
-  )
+  );
 }
-
