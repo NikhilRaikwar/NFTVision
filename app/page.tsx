@@ -1,31 +1,34 @@
-"use client"
+// landing.tsx
 
-import { usePrivy } from "@privy-io/react-auth"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { WalletConnect } from "@/components/wallet-connect"
-import { RetroLogo } from "@/components/retro-logo"
-import { useTheme } from "next-themes"
-import { SharedFooter } from "@/components/shared-footer"
-import { TrendingUp, Wallet, BarChart2, Layers, ShoppingBag, Menu } from "lucide-react"
-import { ChevronRight } from "lucide-react"
-import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text"
-import { cn } from "@/lib/utils"
-import { NeonGradientCard } from "@/components/neon-gradient-card"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { usePrivy } from "@privy-io/react-auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { WalletConnect } from "@/components/wallet-connect";
+import { RetroLogo } from "@/components/retro-logo";
+import { useTheme } from "next-themes";
+import { SharedFooter } from "@/components/shared-footer";
+import { TrendingUp, Wallet, BarChart2, Layers, ShoppingBag, Menu } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
+import { cn } from "@/lib/utils";
+import { NeonGradientCard } from "@/components/neon-gradient-card";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import Link from "next/link"; // Import Link
 
 export default function Page() {
-  const { authenticated } = usePrivy()
-  const router = useRouter()
-  const { theme } = useTheme()
+  const { authenticated } = usePrivy();
+  const router = useRouter();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (authenticated) {
-      router.push("/dashboard")
+      router.push("/dashboard");
     }
-  }, [authenticated, router])
+  }, [authenticated, router]);
 
   const features = [
     {
@@ -34,6 +37,7 @@ export default function Page() {
       icon: TrendingUp,
       gradientFrom: "#ff00cc",
       gradientTo: "#3333ff",
+      link: "/nft-market-analytics"
     },
     {
       title: "Token Balance",
@@ -41,6 +45,7 @@ export default function Page() {
       icon: Wallet,
       gradientFrom: "#00ff87",
       gradientTo: "#60efff",
+      link: "/token-balance"
     },
     {
       title: "Token Metrics",
@@ -48,6 +53,7 @@ export default function Page() {
       icon: BarChart2,
       gradientFrom: "#ff6b6b",
       gradientTo: "#feca57",
+      link: "/token-metrics"
     },
     {
       title: "Supported Blockchains",
@@ -55,6 +61,7 @@ export default function Page() {
       icon: Layers,
       gradientFrom: "#4facfe",
       gradientTo: "#00f2fe",
+      link: "/supported-blockchains"
     },
     {
       title: "NFT Marketplaces",
@@ -62,6 +69,7 @@ export default function Page() {
       icon: ShoppingBag,
       gradientFrom: "#fa709a",
       gradientTo: "#fee140",
+      link: "/nft-marketplaces"
     },
     {
       title: "NFT Transactions",
@@ -69,8 +77,18 @@ export default function Page() {
       icon: ShoppingBag,
       gradientFrom: "#fa709a",
       gradientTo: "#fee140",
+      link: "/nft-transactions"
     },
-  ]
+    // Add NFT Wash Trade feature
+    {
+      title: "NFT Wash Trades",
+      description: "View wash trade trends across different marketplaces.",
+      icon: ShoppingBag,
+      gradientFrom: "#ff4e4e",
+      gradientTo: "#ff9d9d",
+      link: "/nft-washtrades"
+    }
+  ];
 
   return (
     <div className={`min-h-screen flex flex-col ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
@@ -130,7 +148,9 @@ export default function Page() {
           {/* Feature Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {features.map((feature, index) => (
-              <NeonGradientCard key={index} {...feature} />
+              <Link href={feature.link} key={index}>
+                <NeonGradientCard {...feature} />
+              </Link>
             ))}
           </div>
         </div>
@@ -139,6 +159,5 @@ export default function Page() {
       {/* Footer */}
       <SharedFooter />
     </div>
-  )
+  );
 }
-

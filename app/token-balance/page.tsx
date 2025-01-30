@@ -39,9 +39,20 @@ export default function TokenBalancePage() {
     try {
       if (!user?.wallet?.address) return;
       setLoading(true);
+      // Fetching the token balance
       const data = await getTokenBalance(user.wallet.address, selectedBlockchain);
-      setTokenBalances(data?.data || []);
-      setError(null);
+
+      // Log the fetched data to debug the issue
+      console.log("Fetched token balances:", data?.data);
+
+      // If there's no data or the response is empty, handle that case
+      if (data?.data) {
+        setTokenBalances(data.data);
+        setError(null);
+      } else {
+        setError("No token balances found.");
+        setTokenBalances([]);
+      }
     } catch (err) {
       console.error("Error fetching token balances:", err);
       setError(err instanceof Error ? err.message : "An unexpected error occurred");
@@ -56,6 +67,15 @@ export default function TokenBalancePage() {
       token.token_symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||
       token.token_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Format balance with up to 8 decimal places, even if it's a small number
+  const formatBalance = (balance: string) => {
+    const parsedBalance = parseFloat(balance);
+    if (parsedBalance > 0) {
+      return parsedBalance.toFixed(8);  // Show up to 8 decimal places for small balances
+    }
+    return "0";  // If balance is zero or less, return "0"
+  };
 
   if (!authenticated) {
     return null;
@@ -109,7 +129,7 @@ export default function TokenBalancePage() {
                   <strong>Blockchain:</strong> {token.blockchain}
                 </p>
                 <p className="text-sm text-gray-500">
-                  <strong>Balance:</strong> {token.balance}
+                  <strong>Balance:</strong> {formatBalance(token.balance)}
                 </p>
                 <p className="text-sm text-gray-500 mt-2">
                   <strong>Token Contract:</strong>{" "}

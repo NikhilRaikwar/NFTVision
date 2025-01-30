@@ -1,26 +1,27 @@
-"use client"
+// dashboard.tsx
+"use client";
 
-import { usePrivy } from "@privy-io/react-auth"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { Layout } from "@/components/layout"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { BlurFade } from "@/components/magicui/blur-fade"
+import { usePrivy } from "@privy-io/react-auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Layout } from "@/components/layout";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 export default function DashboardPage() {
-  const { authenticated, user } = usePrivy()
-  const router = useRouter()
+  const { authenticated, user } = usePrivy();
+  const router = useRouter();
 
   useEffect(() => {
     if (!authenticated) {
-      router.push("/")
+      router.push("/");
     }
-  }, [authenticated, router])
+  }, [authenticated, router]);
 
   if (!authenticated) {
-    return null
+    return null;
   }
 
   const features = [
@@ -54,7 +55,13 @@ export default function DashboardPage() {
       description: "Explore the latest NFT transactions across blockchains.",
       link: "/nft-transactions",
     },
-  ]
+    // Add NFT Wash Trade feature
+    {
+      title: "NFT Wash Trades",
+      description: "View wash trade trends across different marketplaces.",
+      link: "/nft-washtrades",
+    }
+  ];
 
   return (
     <Layout>
@@ -87,6 +94,5 @@ export default function DashboardPage() {
         ))}
       </div>
     </Layout>
-  )
+  );
 }
-
