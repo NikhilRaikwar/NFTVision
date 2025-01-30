@@ -35,21 +35,23 @@ export const getNFTMarketAnalytics = async (blockchain = "ethereum", timeRange =
   }
 }
 
-export const getTokenBalance = async (offset = 0, limit = 30) => {
+export const getTokenBalance = async (walletAddress: string, blockchain: string, offset = 0, limit = 30) => {
   try {
-    const response = await api.get(`/token/balance?offset=${offset}&limit=${limit}`)
-    return response.data
+    const response = await api.get(
+      `/token/balance?blockchain=${blockchain}&address=${walletAddress}&offset=${offset}&limit=${limit}`
+    );
+    return response.data;
   } catch (error) {
-    handleApiError(error as AxiosError)
+    handleApiError(error as AxiosError);
   }
 }
 
-export const getTokenMetrics = async (offset = 0, limit = 30) => {
+export const getTokenMetrics = async (blockchain: string, offset = 0, limit = 30) => {
   try {
-    const response = await api.get(`/token/metrics?offset=${offset}&limit=${limit}`)
-    return response.data
+    const response = await api.get(`/token/metrics?blockchain=${blockchain}&offset=${offset}&limit=${limit}`);
+    return response.data;
   } catch (error) {
-    handleApiError(error as AxiosError)
+    handleApiError(error as AxiosError);
   }
 }
 
