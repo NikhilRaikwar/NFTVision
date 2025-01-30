@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
-
-import { Layout } from "@/components/layout"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Mail, Github, Globe } from "lucide-react"
-import Image from "next/image"
+import { Layout } from "@/components/layout";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Mail, Github, Globe } from "lucide-react";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
-    <Layout>
+    <Layout showBackButton>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
         <Card className="max-w-3xl mx-auto">
@@ -73,6 +72,5 @@ export default function ContactPage() {
         </Card>
       </div>
     </Layout>
-  )
+  );
 }
-
